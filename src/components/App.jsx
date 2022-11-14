@@ -16,26 +16,6 @@ export class App extends React.Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    // if (prevState.searchString !== this.state.searchString ) {
-    //   try {
-    //     this.setState({ status: 'pending' });
-    //     const picturesInfo = await getCurrentPicture(
-    //       this.state.searchString,
-    //       this.state.page
-    //     );
-    //     if (picturesInfo.data.hits.length === 0) {
-    //       Notiflix.Notify.failure('Sorry, we have not found anything');
-    //       return;
-    //     }
-    //     this.setState({
-    //       arrayOfPictures: picturesInfo.data.hits,
-    //       status: 'resolved',
-    //     });
-    //   } catch (error) {
-    //     this.setState({ error: true, status: 'fail' });
-    //     Notiflix.Notify.failure(error);
-    //   }
-    // }
     if (
       prevState.page < this.state.page ||
       prevState.searchString !== this.state.searchString
@@ -63,7 +43,9 @@ export class App extends React.Component {
 
   handleSubmit = info => {
     this.setState({
+      arrayOfPictures: [],
       searchString: info.search.toLowerCase(),
+      page: 1,
     });
   };
 
@@ -81,11 +63,6 @@ export class App extends React.Component {
           <ImageGallery images={arrayOfPictures} />
         )}
         {status === 'pending' && <Loader />}
-        {/* {bigImageLink.length > 0 && (
-          <Modal onClose={this.resetBigImageLink}>
-            <img src={bigImageLink} alt={bigImageDescription} />
-          </Modal>
-        )} */}
         {arrayOfPictures.length >= 12 && status === 'resolved' && (
           <Button loadMore={this.loadMore} />
         )}

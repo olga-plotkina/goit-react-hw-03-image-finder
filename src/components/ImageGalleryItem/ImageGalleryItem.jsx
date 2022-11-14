@@ -23,14 +23,16 @@ export class ImageGalleryItem extends React.Component {
 
   render() {
     return (
-      <GalleryItem onClick={this.openModal}>
-        <ItemImage src={this.props.preview} alt={this.props.description} />
+      <>
+        <GalleryItem onClick={this.openModal}>
+          <ItemImage src={this.props.preview} alt={this.props.description} />
+        </GalleryItem>
         {this.state.isModalOpen && (
           <Modal onClose={this.closeModal}>
             <img src={this.props.bigImage} alt={this.props.description} />
           </Modal>
         )}
-      </GalleryItem>
+      </>
     );
   }
 }
